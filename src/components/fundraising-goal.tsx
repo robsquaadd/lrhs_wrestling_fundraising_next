@@ -7,7 +7,7 @@ export async function FundraisingGoal() {
   const response = await GET();
   const { emails } = await response.json();
   const raised = emails.total ?? 0;
-  const goal = 10000;
+  const goal = 12000;
   const percentage = (raised / goal) * 100;
   const totalDonors = emails.data?.length ?? 0;
   const teamMembers = 45;

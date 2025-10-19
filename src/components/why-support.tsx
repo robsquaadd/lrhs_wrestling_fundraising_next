@@ -5,6 +5,7 @@ import {
   HeartIcon,
   SparklesIcon,
 } from "@/components/icons";
+import * as AspectRatio from "@radix-ui/react-aspect-ratio";
 
 const reasons = [
   {
@@ -47,14 +48,19 @@ export function WhySupport() {
             </p>
           </div>
           <div className="container mx-auto">
-            <iframe
-              src="https://www.youtube.com/embed/3s7St4rwHCo?si=ZfYwzsv8JTZMxp1s"
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              className="rounded-3xl w-full aspect-video my-8"
-            ></iframe>
+            <div className="w-[295px] mx-auto mb-8 overflow-hidden rounded-lg">
+              <AspectRatio.Root ratio={9 / 16}>
+                <iframe
+                  className="h-full w-full"
+                  src="https://www.youtube.com/embed/23H1UX-RQI4"
+                  title="LRHS Wrestling 2025 - 2026 fundraising video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </AspectRatio.Root>
+            </div>
           </div>
           <div className="grid gap-6 sm:grid-cols-2">
             {reasons.map((reason, index) => {
