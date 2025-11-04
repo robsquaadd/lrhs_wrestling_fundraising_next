@@ -1,7 +1,7 @@
 export function ImpactStats() {
   const stats = [
-    { value: "3", label: "State Qualifiers", sublabel: "Last Season" },
-    { value: "3", label: "District Champions", sublabel: "Last Season" },
+    { value: "2", label: "State Qualifiers", sublabel: "Last Season" },
+    { value: "10", label: "Regional Qualifiers", sublabel: "Last Season" },
     { value: "100%", label: "Graduation Rate", sublabel: "Team Average" },
     { value: "3.5", label: "Team GPA", sublabel: "Academic Excellence" },
   ];

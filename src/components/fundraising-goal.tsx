@@ -1,22 +1,43 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { DollarSignIcon, UsersIcon, TargetIcon } from "@/components/icons";
-import { GET } from "@/app/api/readEmails/route";
+import React, { useEffect, useState } from "react";
 
-export async function FundraisingGoal() {
-  const response = await GET();
-  const { emails } = await response.json();
-  const raised = emails.total ?? 0;
-  const goal = 12000;
-  const percentage = (raised / goal) * 100;
-  const totalDonors = emails.data?.length ?? 0;
-  const teamMembers = 45;
-  const startDate = new Date("10/13/2025");
-  const endDate = new Date("11/21/2025");
-  const daysRemaining = (
-    (endDate.getTime() - startDate.getTime()) /
-    (1000 * 60 * 60 * 24)
-  ).toFixed(0);
+export function FundraisingGoal() {
+  const [emails, setEmails] = useState<{ total: number; data: any[] } | null>(
+    null
+  );
+  const [raised, setRaised] = useState<number>(0);
+  const [percentage, setPercentage] = useState<number>(0.0);
+  const [totalDonors, setTotalDonors] = useState<number>(0);
+  const [teamMembers] = useState<number>(45);
+  const [goal] = useState<number>(12000);
+  const [startDate] = useState<Date>(new Date("10/13/2025"));
+  const [endDate] = useState<Date>(new Date("11/21/2025"));
+  const [daysRemaining] = useState<string>(
+    ((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)).toFixed(
+      0
+    )
+  );
+
+  useEffect(() => {
+    fetch(`/api/readEmails`)
+      .then((response) => response.json())
+      .then((emailObject) => {
+        const emailsData = emailObject.emails;
+        setEmails(emailsData);
+        setRaised(emailsData.total ?? 0);
+        setTotalDonors(emailsData.data?.length ?? 0);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (goal > 0) {
+      setPercentage((raised / goal) * 100);
+    }
+  }, [raised, goal]);
 
   return (
     <section className="py-16 md:py-24">
